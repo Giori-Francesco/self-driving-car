@@ -42,7 +42,22 @@ class Car {
         ];
     }
 
-    checkCollision() {
+    checkLap(lapRow) {
+        let boundary = [];
+        push();
+        translate(this.pos.x, this.pos.y);
+        rotate(this.dir + HALF_PI);
+        this.calcBoundary().forEach(v => {
+            let vec = createVector(v.x + this.pos.x, v.y + this.pos.y);
+            boundary.push(vec);
+        });
+        pop();
+        if (collideLinePoly(lapRow[0], lapRow[1], lapRow[2], lapRow[3], boundary)) {
+            console.log("LAP");
+        }
+    }
+
+    checkCollision(obstacles) {
         let boundary = [];
         fill(51, 0, 0);
         push();
@@ -58,7 +73,14 @@ class Car {
                 [createVector(0, 0), createVector(0, height), createVector(width, height), createVector(width, 0)],
                 false,
                 false
-            )) print("collision");
+            )) {
+                noLoop();
+                background(255, 0, 0, 50);
+            }
+        if (obstacles && (collidePolyPoly(boundary, obstacles[0], false, false) || collidePolyPoly(boundary, obstacles[1], false, false))) {
+            noLoop();
+            background(255, 0, 0, 50);
+        }
     }
 
     show() {
