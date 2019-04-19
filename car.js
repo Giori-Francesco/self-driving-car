@@ -2,53 +2,80 @@ class Car {
     constructor(pos, dir) {
         this.dir = dir;
         this.pos = pos;
-        this.vel = createVector();
-        this.acc = createVector(0.1, 0.1);
+        this.vel = 0;
+        this.acc = 0;
     }
 
     steer(steeringForce) {
-        this.dir.rotate(steeringForce);
+        this.dir += steeringForce;
     }
 
-    accelerate() {
-        let acc = createVector(0.1, 0);
-        acc.rotate(this.vel.heading());
-        this.acc.add(acc);
-    }
-
-    decelerate() {
-        let dec = createVector(0.1, 0);
-        dec.rotate(this.vel.heading() - TWO_PI);
-        this.acc.sub(dec);
+    accelerate(acc) {
+        this.acc += acc;
     }
 
     update() {
-        this.vel.add(this.acc);
-        this.pos.add(this.vel);
-        this.acc.mult(0);
-        this.vel.mult(0.99);
+        push();
+        rotate(this.dir);
+        this.vel += this.acc;
+        this.pos.add(createVector(this.vel, 0).rotate(this.dir));
+        this.acc *= 0.1;
+        this.vel *= 0.99;
+        pop();
         this.checkCollision();
     }
 
+    calcBoundary() {
+        return [
+            {
+                x: 0,
+                y: -5
+            },
+            {
+                x: -5,
+                y: 5
+            },
+            {
+                x: 5,
+                y: 5
+            }
+        ];
+    }
+
     checkCollision() {
-        if (collideRectPoly(this.pos.x,
-                this.pos.y,
-                10,
-                10,
+        let boundary = [];
+        fill(51, 0, 0);
+        push();
+        translate(this.pos.x, this.pos.y);
+        rotate(this.dir + HALF_PI);
+        this.calcBoundary().forEach(v => {
+            let vec = createVector(v.x + this.pos.x, v.y + this.pos.y);
+            boundary.push(vec);
+        });
+        pop();
+        if (collidePolyPoly(
+                boundary,
                 [createVector(0, 0), createVector(0, height), createVector(width, height), createVector(width, 0)],
+                false,
                 false
             )) print("collision");
     }
 
     show() {
         push();
+        rectMode(CENTER);
         translate(this.pos.x, this.pos.y);
-        rotate(this.dir.heading());
+        rotate(this.dir + HALF_PI);
 
         strokeWeight(1);
         stroke(255);
         fill(0);
-        rect(0, 0, 10, 10);
+        
+        beginShape();
+        this.calcBoundary().forEach(v => {
+            vertex(v.x, v.y);
+        });
+        endShape(CLOSE);
 
         strokeWeight(4);
         stroke(255, 0, 0);
