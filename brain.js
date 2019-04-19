@@ -27,7 +27,6 @@ class Brain {
             }
             this.model.add(layer);
         });
-        // this.model.compile({});
     }
 
     predict(arr) {
@@ -38,43 +37,3 @@ class Brain {
         return output;
     }
 }
-
-/*
-    brain
-        weights
-            l1
-                w1
-                w2
-                w3
-                w4
-                w5
-            l2
-                w1
-                w2
-                w3
-                w4
-            l3
-                w1
-                w2
-                w3
-                w4
-        layers
-            l1
-                n1
-                n2
-                n3
-            l2
-                n1
-                n2
-                n3
-            l3
-                n1
-                n2
-                n3
-        biases
-            b1
-            b2
-            b3
-
-
-*/

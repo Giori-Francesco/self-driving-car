@@ -34,30 +34,30 @@ class Car {
 
             push();
             translate(this.pos.x, this.pos.y);
-            rotate(this.dir);
+            pop();
             if (collideLineLine(
                 0, 0, lineNeg60.x, lineNeg60.y,
-                obstacles[0][i].x, obstacles[0][i].y, obstacles[0][i + 1].x, obstacles[0][i + 1].y
+                CurrentObstacle.x, CurrentObstacle.y, NextObstacle.x, NextObstacle.y
                 )) console.log("line -60 collision");
             if (collideLineLine(
                 0, 0, lineNeg30.x, lineNeg30.y, 
-                obstacles[0][i].x, obstacles[0][i].y, obstacles[0][i + 1].x, obstacles[0][i + 1].y
+                CurrentObstacle.x, CurrentObstacle.y, NextObstacle.x, NextObstacle.y
                 )) console.log("line -30 collision");
             if (collideLineLine(
                 0, 0, line0.x, line0.y, 
-                obstacles[0][i].x, obstacles[0][i].y, obstacles[0][i + 1].x, obstacles[0][i + 1].y
+                CurrentObstacle.x, CurrentObstacle.y, NextObstacle.x, NextObstacle.y
                 )) console.log("line 0 collision");
             if (collideLineLine(
                 0, 0, linePos30.x, linePos30.y, 
-                obstacles[0][i].x, obstacles[0][i].y, obstacles[0][i + 1].x, obstacles[0][i + 1].y
+                CurrentObstacle.x, CurrentObstacle.y, NextObstacle.x, NextObstacle.y
                 )) console.log("line 30 collision");
             if (collideLineLine(
                 0, 0, linePos60.x, linePos60.y, 
-                obstacles[0][i].x, obstacles[0][i].y, obstacles[0][i + 1].x, obstacles[0][i + 1].y
+                CurrentObstacle.x, CurrentObstacle.y, NextObstacle.x, NextObstacle.y
                 )) console.log("line 60 collision");
-            line(0, 0, linePos60.x, linePos60.y);
-            pop();
-        }
+                stroke(0);
+                line(0, 0, linePos60.x, linePos60.y);
+            }
         
         stroke(0, 255, 0);
         stroke(0);
@@ -169,46 +169,3 @@ class Car {
         pop();
     }
 }
-
-/*
-line(82, 54, 118, 57);
-line(118, 57, 151, 55);
-line(151, 55, 185, 55);
-line(185, 55, 232, 63);
-line(232, 63, 274, 67);
-line(274, 67, 364, 60);
-line(364, 60, 468, 72);
-line(468, 72, 568, 73);
-line(568, 73, 640, 70);
-line(640, 70, 685, 78);
-line(685, 78, 719, 105);
-line(719, 105, 736, 144);
-line(736, 144, 744, 208);
-line(744, 208, 749, 269);
-line(749, 269, 750, 324);
-line(750, 324, 754, 360);
-line(754, 360, 755, 412);
-line(755, 412, 732, 468);
-line(732, 468, 710, 487);
-line(710, 487, 647, 506);
-line(647, 506, 604, 511);
-line(604, 511, 526, 532);
-line(526, 532, 463, 526);
-line(463, 526, 409, 520);
-line(409, 520, 364, 525);
-line(364, 525, 312, 519);
-line(312, 519, 271, 516);
-line(271, 516, 217, 505);
-line(217, 505, 176, 498);
-line(176, 498, 118, 458);
-line(118, 458, 89, 411);
-line(89, 411, 73, 349);
-line(73, 349, 64, 294);
-line(64, 294, 55, 249);
-line(55, 249, 53, 204);
-line(53, 204, 54, 164);
-line(54, 164, 51, 138);
-line(51, 138, 53, 97);
-line(53, 97, 60, 65);
-line(60, 65, 83, 54);
-*/
