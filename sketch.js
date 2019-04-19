@@ -212,7 +212,7 @@ let car;
 
 function setup() {
     createCanvas(windowWidth * 0.9, windowHeight * 0.9);
-    car = new Car(createVector(100, 100), 0);
+    car = new Car(createVector(100, 100), 0, [5, 7, 7, 4]);
     collideDebug(true);
 }
 
@@ -244,6 +244,7 @@ function draw() {
     car.update();
     car.show()
     car.checkLap(lap);
+    car.drive(obs);
 }
 
 function mousePressed() {
