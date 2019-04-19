@@ -1,9 +1,10 @@
 class Car {
-    constructor(pos, dir) {
+    constructor(pos, dir, brain) {
         this.dir = dir;
         this.pos = pos;
         this.vel = 0;
         this.acc = 0;
+        this.brain = brain || new Brain();
     }
 
     steer(steeringForce) {
